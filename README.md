@@ -37,6 +37,7 @@ O projeto foi criado principalmente para ambientes onde um computador possui uma
 Por exemplo, em um auditório:
 
 ```text
+
 ┌───────────────────┐
 │                   │
 │   MONITOR 1       │
@@ -64,7 +65,7 @@ O PyScreenControl permite visualizar o conteúdo do **Monitor 2 dentro de uma ja
 * [PySide6](https://doc.qt.io/qtforpython/)
 * [MSS](https://python-mss.readthedocs.io/)
 * [PyWin32](https://github.com/mhammond/pywin32)
-* [Nuitka](https://nuitka.net/)
+* [pyInstaller](https://pyinstaller.org/)
 
 ### Interface
 
@@ -89,14 +90,6 @@ O projeto utiliza APIs do Windows através do **PyWin32** para movimentação e 
 * Conexão com o segundo monitor/projetor
 * Ambiente de tela estendida configurado no Windows
 
-### Dependências
-
-Instale as dependências com:
-
-```bash
-pip install PySide6 mss pywin32
-```
-
 ---
 
 ## 🚀 Executando o projeto
@@ -104,13 +97,25 @@ pip install PySide6 mss pywin32
 Clone ou copie o projeto:
 
 ```bash
-git clone <URL_DO_REPOSITORIO>
+git clone https://github.com/valeedimilson/PyScreenControl.git
 ```
 
 Entre na pasta:
 
 ```bash
 cd PyScreenControl
+```
+
+Inicie o ambiente virtual com:
+
+```bash
+python -m venv .venv
+```
+
+Instale as dependências com:
+
+```bash
+pip install -r requirements.txt
 ```
 
 Execute:
@@ -280,18 +285,18 @@ Isso pode ser útil durante apresentações ou quando o operador precisa acompan
 
 # 📦 Compilação
 
-O projeto utiliza **Nuitka** para gerar a versão executável para Windows.
+O projeto utiliza **PyInstaller** para gerar a versão executável para Windows.
 
-## Instalar o Nuitka
+## Instalar o PyInstaller
 
 ```bash
-python -m pip install -U Nuitka
+python -m pip install -U pyinstaller
 ```
 
 Verifique:
 
 ```bash
-python -m nuitka --version
+python -m pyinstaller --version
 ```
 
 ---
@@ -303,43 +308,26 @@ A versão `standalone` gera uma pasta contendo o executável e todas as dependê
 Execute:
 
 ```bash
-python -m nuitka --standalone --enable-plugin=pyside6 --include-data-dir=assets=assets --windows-console-mode=disable --windows-icon-from-ico=assets\logo.ico --output-dir=dist main.py
+python -m PyInstaller --noconfirm --clean --windowed --onefile --name PyScreenControl --icon "assets\logo.ico" --add-data "assets;assets" main.py
 ```
 
 O resultado será semelhante a:
 
 ```text
 dist/
-└── main.dist/
-    ├── main.exe
-    ├── assets/
-    │   ├── logo.ico
-    │   └── logo.jpeg
-    └── ...
+└─ main.exe
+├── assets/
+│   ├── logo.ico
+│   └── logo.jpeg
+└── ...
 ```
 
 Execute:
 
 ```bash
-dist\main.dist\main.exe
+dist\main.exe
 ```
 
----
-
-## 📦 Compilação Onefile
-
-Depois de confirmar que a versão `standalone` está funcionando corretamente, é possível gerar um único executável:
-
-```bash
-python -m nuitka --onefile --enable-plugin=pyside6 --include-data-dir=assets=assets --windows-console-mode=disable --windows-icon-from-ico=assets\logo.ico --output-dir=dist main.py
-```
-
-O resultado esperado:
-
-```text
-dist/
-└── main.exe
-```
 
 O executável pode então ser distribuído para outros computadores Windows sem a necessidade de instalar Python.
 
@@ -353,7 +341,7 @@ Para executar durante o desenvolvimento:
 python main.py
 ```
 
-Para testar alterações rapidamente, recomenda-se executar o código-fonte antes de realizar uma nova compilação com Nuitka.
+Para testar alterações rapidamente, recomenda-se executar o código-fonte antes de realizar uma nova compilação com pyInstaller.
 
 ---
 
