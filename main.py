@@ -1087,6 +1087,7 @@ class ScreenMirror(QMainWindow):
 
             QWidget {
                 font-size: 10pt;
+                color: black;
             }
 
             #preview {
@@ -1112,6 +1113,7 @@ class ScreenMirror(QMainWindow):
                 border-radius: 4px;
                 padding: 5px 8px;
                 min-height: 20px;
+                color: black;
             }
 
             QComboBox:hover,
@@ -1130,14 +1132,17 @@ class ScreenMirror(QMainWindow):
 
             QPushButton:hover {
                 background: #1565c0;
+                
             }
 
             QPushButton:pressed {
                 background: #0d47a1;
+                
             }
 
             QCheckBox {
                 spacing: 5px;
+                
             }
         """)
 
